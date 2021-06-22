@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.proje.addToCart.business.abstracts.EmployeeService;
 import com.proje.addToCart.dataAccess.abstracts.EmployeeDao;
 import com.proje.addToCart.entities.concretes.Employee;
+import com.proje.addToCart.entities.concretes.Order;
 
 @Service
 public class EmployeeManager implements EmployeeService{
@@ -49,8 +50,9 @@ public class EmployeeManager implements EmployeeService{
 	}
 
 	@Override
-	public void update(int id, Employee employee) {
-		Employee _employee=employeeDao.getOne(id);
+	public Employee update(Employee employee) {
+		Integer rollNumber=employee.getEmployeeId();
+		Employee _employee=employeeDao.findById(rollNumber).get();
 		_employee.setName(employee.getName());
 		_employee.setLastName(employee.getLastName());
 		_employee.setTitle(employee.getTitle());
@@ -58,7 +60,7 @@ public class EmployeeManager implements EmployeeService{
 		_employee.setPass(employee.getPass());
 		_employee.setHireDate(employee.getHireDate());
 		
-		employeeDao.save(employee);
+		return employeeDao.save(employee);
 		
 	}
 

@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proje.addToCart.business.abstracts.OrderService;
 import com.proje.addToCart.entities.concretes.Order;
-
-@RestController
 @CrossOrigin(origins="http://localhost:4200")
+@RestController
+
 @RequestMapping("/api/orders")
 public class OrdersController {
 	
@@ -40,9 +40,9 @@ public class OrdersController {
 		this.orderService.add(order);
 	}
 	
-	@PutMapping("/update/{id}")
-	public void update(@PathVariable int id, @RequestBody Order order) {
-		this.orderService.update(id,order);
+	@PutMapping("/update")
+	public Order update(@RequestBody Order order) {
+		return this.orderService.update(order);
 	}
 	
 	@DeleteMapping("/delete/{id}")

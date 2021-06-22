@@ -40,13 +40,14 @@ public class ProductManager implements ProductService{
 
 	@Override
 	@Transactional
-	public void update(int id, Product product) {
-		Product _product=productDao.getOne(id);
+	public Product update(Product product) {
+		Integer rollNumber=product.getProductId();
+		Product _product =productDao.findById(rollNumber).get();
 		_product.setCategoryId(product.getCategoryId());
 		_product.setProductName(product.getProductName());
 		_product.setUnitPrice(product.getUnitPrice());
 		_product.setUnitsInStock(product.getUnitsInStock());
-		productDao.save(product);
+		return productDao.save(product);
 	}
 
 	@Override

@@ -41,13 +41,14 @@ public class OrderManager implements OrderService {
 
 	@Override
 	@Transactional
-	public void update(int id, Order order) {
-		Order _order=orderDao.getOne(id);
+	public Order update(Order order) {
+		Integer rollNumber=order.getOrderId();
+		Order _order=orderDao.findById(rollNumber).get();
 		_order.setEmployeeId(order.getEmployeeId());
 		_order.setCustomerId(order.getCustomerId());
 		_order.setOrderDate(order.getOrderDate());
 		_order.setShipCity(order.getShipCity());
-		orderDao.save(_order);
+		return orderDao.save(order);
 		
 	}
 

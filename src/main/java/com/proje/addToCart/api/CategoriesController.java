@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proje.addToCart.business.abstracts.CategoryService;
 import com.proje.addToCart.entities.concretes.Category;
-
-@RestController
 @CrossOrigin(origins="http://localhost:4200")
+@RestController
 @RequestMapping("/api/categories")
 public class CategoriesController {
 	
@@ -40,9 +39,9 @@ public class CategoriesController {
 		this.categoryService.add(category);
 	}
 	
-	@PutMapping("/update/{id}")
-	public void update(@PathVariable int id, @RequestBody Category category) {
-		this.categoryService.update(id,category);
+	@PutMapping("/update")
+	public Category update(@RequestBody Category category) {
+		return this.categoryService.update(category);
 	}
 	
 	@DeleteMapping("/delete/{id}")

@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proje.addToCart.business.abstracts.CustomerService;
 import com.proje.addToCart.entities.concretes.Customer;
-
-@RestController
 @CrossOrigin(origins="http://localhost:4200")
+@RestController
 @RequestMapping("/api/customers")
 
 public class CustomersController {
@@ -41,9 +40,9 @@ public class CustomersController {
 		this.customerService.add(customer);
 	}
 	
-	@PutMapping("/update/{id}")
-	public void update(@PathVariable int id, @RequestBody Customer customer) {
-		this.customerService.update(id,customer);
+	@PutMapping("/update")
+	public Customer update(@RequestBody Customer customer) {
+		return this.customerService.update(customer);
 	}
 	
 	@DeleteMapping("/delete/{id}")

@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.proje.addToCart.LoginRequest;
 import com.proje.addToCart.business.abstracts.EmployeeService;
 import com.proje.addToCart.entities.concretes.Employee;
-
-@RestController
 @CrossOrigin(origins="http://localhost:4200")
+@RestController
 @RequestMapping("/api/employees")
 public class EmployeesController {
 	
@@ -41,9 +40,9 @@ public class EmployeesController {
 		this.employeeService.add(employee);
 	}
 	
-	@PutMapping("/update/{id}")
-	public void update(@PathVariable int id, @RequestBody Employee employee) {
-		this.employeeService.update(id,employee);
+	@PutMapping("/update")
+	public Employee update(@RequestBody Employee employee) {
+		return this.employeeService.update(employee);
 	}
 	
 	@DeleteMapping("/delete/{id}")

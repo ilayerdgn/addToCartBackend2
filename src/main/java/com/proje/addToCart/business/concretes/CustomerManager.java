@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.proje.addToCart.business.abstracts.CustomerService;
 import com.proje.addToCart.dataAccess.abstracts.CustomerDao;
 import com.proje.addToCart.entities.concretes.Customer;
+import com.proje.addToCart.entities.concretes.Order;
 
 @Service
 public class CustomerManager implements CustomerService{
@@ -44,15 +45,16 @@ public class CustomerManager implements CustomerService{
 
 	@Override
 	@Transactional
-	public void update(int id, Customer customer) {
-		Customer _customer=customerDao.getOne(id);
+	public Customer update(Customer customer) {
+		Integer rollNumber=customer.getCustomerId();
+		Customer _customer=customerDao.findById(rollNumber).get();
 		_customer.setCustomerName(customer.getCustomerName());
 		_customer.setSurname(customer.getSurname());
 		_customer.setMail(customer.getMail());
 		_customer.setPassw(customer.getPassw());
 		_customer.setCity(customer.getCity());
 		
-		customerDao.save(customer);
+		return customerDao.save(customer);
 	}
 
 	@Override
